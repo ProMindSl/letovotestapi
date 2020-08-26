@@ -166,7 +166,7 @@ return [
          * Package Service Providers...
          */
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
-
+        Fomvasss\Dadata\DadataServiceProvider::class,
 
         /*
          * Application Service Providers...
