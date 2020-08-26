@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StudentCreateRequest;
 use App\Student;
 use Illuminate\Http\Request;
 
@@ -34,7 +35,7 @@ class StudentController extends Controller
     {
         $students = Student::all();
 
-        if (! empty($students) && count($students) > 0)               // some has been found
+        if (! empty($students) && count($students) > 0)               // resources has been found
         {
             return response()->json(
                 [
@@ -57,7 +58,7 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StudentCreateRequest $request)
     {
         //
     }
@@ -94,7 +95,7 @@ class StudentController extends Controller
     {
         $student = Student::find($id);
 
-        if (! empty($student))                                      // some has been found
+        if (! empty($student))                                      // resource has been found
         {
             return response()->json(
                 [
@@ -109,8 +110,6 @@ class StudentController extends Controller
                     'description' => 'Student is not found'
                 ], 404);
         }
-
-        return response()->json($student, 200);
     }
 
     /**
