@@ -29,7 +29,7 @@ Route::group([
 |--------------------------------------------------------------------------
 */
 Route::group([
-    'middleware' => 'auth:api'
+    'middleware' => 'api'
 ], function () {
 
     Route::apiResources(
