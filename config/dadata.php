@@ -12,4 +12,7 @@ return [
 
     'secret' => env('DADATA_SECRET', ''),
 
+    'code_error' => 2,
+    'code_halfsuccess' => 1,
+    'code_ambiguous' => 3,
 ];
