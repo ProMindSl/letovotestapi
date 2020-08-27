@@ -7,74 +7,102 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @SWG\Definition(
  *  definition="Student",
- *  @SWG\Property(
+ *  @SWG\Property
+ *  (
  *      property="id",
  *      type="integer"
  *  ),
- *  @SWG\Property(
+ *  @SWG\Property
+ *  (
  *      property="last_name",
  *      type="string"
  *  ),
- *  @SWG\Property(
+ *  @SWG\Property
+ *  (
  *      property="name",
  *      type="string"
  *  ),
- *  @SWG\Property(
+ *  @SWG\Property
+ *  (
  *      property="patronymic",
  *      type="string"
  *  ),
- *  @SWG\Property(
+ *  @SWG\Property
+ *  (
  *      property="email",
  *      type="string"
  *  ),
- *  @SWG\Property(
+ *  @SWG\Property
+ *  (
  *      property="phone_number",
  *      type="string"
  *  ),
- *  @SWG\Property(
- *      property="country",
+ *  @SWG\Property
+ *  (
+ *      property="full_address",
  *      type="string"
  *  ),
- *   @SWG\Property(
+ *  @SWG\Property
+ *  (
+ *      property="country",
+ *      type="string"
+ *   ),
+ *   @SWG\Property
+ *  (
  *      property="postal_code",
  *      type="string"
  *  ),
- *  @SWG\Property(
+ *  @SWG\Property
+ *  (
  *      property="region",
  *      type="string"
  *  ),
- *  @SWG\Property(
+ *  @SWG\Property
+ *  (
  *      property="area",
  *      type="string"
  *  ),
- *  @SWG\Property(
+ *  @SWG\Property
+ *  (
  *      property="city",
  *      type="string"
  *  ),
- *  @SWG\Property(
+ *  @SWG\Property
+ *  (
  *      property="street",
  *      type="string"
  *  ),
- *  @SWG\Property(
+ *  @SWG\Property
+ *  (
  *      property="house",
  *      type="string"
  *  ),
- *  @SWG\Property(
+ *  @SWG\Property
+ *  (
  *      property="block",
  *      type="string"
  *  ),
- *  @SWG\Property(
+ *  @SWG\Property
+ *  (
  *      property="flat",
  *      type="string"
  *  ),
- *  @SWG\Property(
+ *  @SWG\Property
+ *  (
  *      property="geo_lat",
  *      type="string"
  *  ),
- *  @SWG\Property(
- *      property="geo_lon",
+ *  @SWG\Property
+ *  (
+ *      property="city_type",
  *      type="string"
+ *  ),
+ *  @SWG\Property
+ *  (
+ *      property="qc_address",
+ *      type="integer"
  *  )
+ *
  * )
  */
 class Student extends Model
@@ -104,7 +132,10 @@ class Student extends Model
         'block',
         'flat',
         'geo_lat',
-        'geo_lon'
+        'geo_lon',
+        'city_type',
+        'qc_address',
+        'full_address'
     ];
 
     /**
