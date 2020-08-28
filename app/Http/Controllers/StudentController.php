@@ -12,30 +12,38 @@ use \Validator;
 class StudentController extends Controller
 {
     /**
-     * @SWG\Get
+     * @OA\Get
      * (
-     *     path="/students",
+     *     path="/api/students",
      *     summary="Get list of students",
      *     tags={"Students"},
-     *     @SWG\Response
+     *     @OA\Response
      *     (
      *         response=200,
-     *         description="successful operation",
-     *         @SWG\Schema
+     *         description="Successful get students list",
+     *         @OA\JsonContent
      *         (
-     *             type="array",
-     *             @SWG\Items(ref="#/definitions/Student")
-     *         ),
+     *             @OA\Items(ref="#/components/schemas/Student")
+     *         )
+     *
      *     ),
-     *     @SWG\Response
+     *     @OA\Response
      *     (
      *         response=204,
-     *         description="empty resource list"
+     *         description="Empty students list",
+     *         @OA\JsonContent
+     *         (
+     *              @OA\Property(property="description", type="string")
+     *         )
      *     ),
-     *     @SWG\Response
+     *     @OA\Response
      *     (
      *         response="401",
      *         description="Unauthorized user",
+     *         @OA\JsonContent
+     *         (
+     *              @OA\Property(property="error", type="string")
+     *         )
      *     ),
      * )
      */
@@ -57,110 +65,82 @@ class StudentController extends Controller
     }
 
     /**
-     * @SWG\Post
+     * @OA\Post
      * (
-     *     path="/students",
-     *     summary="Store a newly created student",
+     *     path="/api/students",
+     *     summary="Create student",
      *     tags={"Students"},
      *     description="Store a newly created student",
-     *     @SWG\Parameter
+     *
+     *     @OA\Parameter
      *     (
-     *         name="fio",
-     *         in="body",
-     *         description="Student FIO",
-     *         required=true,
-     *         type="string",
+     *          name="fio",
+     *          in="query",
+     *          description="Student's FIO",
+     *          required=true,
+     *          @OA\Schema(type="string")
      *     ),
-     *     @SWG\Parameter
+     *     @OA\Parameter
      *     (
      *         name="email",
-     *         in="body",
-     *         description="Student e-mail",
+     *         in="query",
+     *         description="Student's e-mail",
      *         required=true,
-     *         type="string",
+     *         @OA\Schema(type="string")
      *     ),
-     *     @SWG\Parameter
+     *     @OA\Parameter
      *     (
      *         name="phone_number",
-     *         in="body",
-     *         description="Student phone number",
+     *         in="query",
+     *         description="Student's phone",
      *         required=true,
-     *         type="string",
+     *         @OA\Schema(type="string")
      *     ),
-     *     @SWG\Parameter
+     *     @OA\Parameter
      *     (
      *         name="address",
-     *         in="body",
+     *         in="query",
      *         description="Student's address",
      *         required=true,
-     *         type="string",
+     *         @OA\Schema(type="string")
      *     ),
-     *     @SWG\Response
+     *     @OA\Response
      *     (
      *         response=201,
-     *         description="successful operation",
-     *         @SWG\Schema
+     *         description="Successful operation",
+     *         @OA\JsonContent
      *         (
-     *              type="array",
-     *              @SWG\Items
-     *              (
-     *                  type="object",
-     *                  @SWG\Property
-     *                  (
-     *                      property="new_obj",
-     *                      @SWG\Schema(ref="#/definitions/Student")
-     *                  ),
-     *                  @SWG\Property
-     *                  (
-     *                      property="description",
-     *                      type="string"
-     *                  )
-     *              )
-     *          )
+     *              @OA\Property( property="description", type="string"),
+     *              @OA\Property( property="new_obj", type="object", allOf = { @OA\Schema(ref="#/components/schemas/Student") } )
+     *         )
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response
+     *     (
      *          response="422",
      *          description="One of the parameters is incorrect",
-     *          @SWG\Schema
+     *          @OA\JsonContent
      *          (
-     *              type="array",
-     *              @SWG\Items
-     *              (
-     *                  type="object",
-     *                  @SWG\Property
-     *                  (
-     *                      property="error_field",
-     *                      type="string"
-     *                  ),
-     *                  @SWG\Property
-     *                  (
-     *                      property="description",
-     *                      type="string"
-     *                  )
-     *              )
+     *              @OA\Property(property="description", type="string"),
+     *              @OA\Property(property="error_field", type="string")
      *          )
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response
+     *     (
      *          response="400",
-     *          description="Unexpected server error or related services",
-     *          @SWG\Schema
+     *          description="Unexpected server error or error accessing related third-party services",
+     *          @OA\JsonContent
      *          (
-     *              type="array",
-     *              @SWG\Items
-     *              (
-     *                  type="object",
-     *                  @SWG\Property
-     *                  (
-     *                      property="description",
-     *                      type="string"
-     *                  )
-     *              )
+     *              @OA\Property(property="description", type="string")
      *          )
      *     ),
-     *     @SWG\Response
+     *     @OA\Response
      *     (
      *          response="401",
      *          description="Unauthorized user",
+     *          @OA\JsonContent
+     *          (
+     *              @OA\Property(property="error", type="string")
+     *          )
      *     )
      * )
      */
@@ -183,7 +163,7 @@ class StudentController extends Controller
         {
             return response()->json(
                 [
-                    'description' => 'Ошибка добаления ученика: Некорректное ФИО',
+                    'description' => 'Ошибка добавления ученика: Некорректное ФИО',
                     'error_field' => 'fio'
                 ], 422);
         }
@@ -199,7 +179,7 @@ class StudentController extends Controller
         {
             return response()->json(
                 [
-                    'description' => 'Ошибка добаления ученика: Некорректный номер телефона',
+                    'description' => 'Ошибка добавления ученика: Некорректный номер телефона',
                     'error_field' => 'phone_number'
                 ], 422);
         }
@@ -213,7 +193,7 @@ class StudentController extends Controller
         {
             return response()->json(
                 [
-                    'description' => 'Ошибка добаления ученика: Указанный номер телефона уже существует в базе данных',
+                    'description' => 'Ошибка добавления ученика: Указанный номер телефона уже существует в базе данных',
                     'error_field' => 'phone_number'
                 ], 422);
         }
@@ -229,7 +209,7 @@ class StudentController extends Controller
         {
             return response()->json(
                 [
-                    'description' => 'Ошибка добаления ученика: Некорректный адрес',
+                    'description' => 'Ошибка добавления ученика: Некорректный адрес',
                     'error_field' => 'address'
                 ], 422);
         }
@@ -274,7 +254,7 @@ class StudentController extends Controller
             {
                 return response()->json(
                     [
-                        'description' => 'Непредвиденная ошибка добаления ученика'
+                        'description' => 'Непредвиденная ошибка добавления ученика'
                     ], 400);
             }
         }
@@ -295,173 +275,137 @@ class StudentController extends Controller
     }
 
     /**
-     * @SWG\Get
+     * @OA\Get
      * (
-     *     path="/students/{student_id}",
+     *     path="/api/students/{student_id}",
      *     summary="Get student by id",
      *     tags={"Students"},
      *     description="Get student by id",
-     *     @SWG\Parameter
+     *     @OA\Parameter
      *     (
      *         name="student_id",
      *         in="path",
      *         description="Student id",
      *         required=true,
-     *         type="integer",
+     *         @OA\Schema(type="integer")
      *     ),
-     *     @SWG\Response
+     *     @OA\Response
      *     (
      *         response=200,
-     *         description="successful operation",
-     *         @SWG\Schema(ref="#/definitions/Student"),
+     *         description="Successful get student",
+     *         @OA\JsonContent(ref="#/components/schemas/Student"),
      *     ),
-     *     @SWG\Response
+     *     @OA\Response
      *     (
      *         response="404",
      *         description="Student is not found",
      *     ),
-     *     @SWG\Response
+     *     @OA\Response
      *     (
      *         response="401",
      *         description="Unauthorized user",
+     *         @OA\JsonContent
+     *         (
+     *              @OA\Property(property="error", type="string")
+     *         )
      *     )
      * )
      */
     public function show($id)
     {
-        $student = Student::find($id);
-
-        if (! empty($student))                                      // student has been found
-        {
-            return response()->json($student, 200);
-        }
-        else                                                        // student not exist
-        {
-            return response()->json(
-                [
-                    'description' => 'Student is not found'
-                ], 404);
-        }
+        $student = Student::findOrFail($id);
+        return response()->json($student, 200);
     }
 
     /**
-     * @SWG\Put
+     * @OA\Put
      * (
-     *     path="/students/{student_id}",
-     *     summary="Update the student by id",
+     *     path="/api/students/{student_id}",
+     *     summary="Update student by id",
      *     tags={"Students"},
-     *     description="Update the student by id",
-     *     @SWG\Parameter
+     *     description="Update student by id",
+     *     @OA\Parameter
      *     (
      *         name="student_id",
      *         in="path",
      *         description="Student id",
      *         required=true,
-     *         type="integer",
+     *         @OA\Schema(type="integer")
      *     ),
-     *     @SWG\Parameter
+     *     @OA\Parameter
      *     (
      *         name="fio",
-     *         in="body",
-     *         description="Student FIO",
+     *         in="query",
+     *         description="Student's FIO",
      *         required=false,
-     *         type="string",
+     *         @OA\Schema(type="string")
      *     ),
-     *     @SWG\Parameter
+     *     @OA\Parameter
      *     (
      *         name="email",
-     *         in="body",
-     *         description="Student e-mail",
+     *         in="query",
+     *         description="Student's e-mail",
      *         required=false,
-     *         type="string",
+     *         @OA\Schema(type="string")
      *     ),
-     *     @SWG\Parameter
+     *     @OA\Parameter
      *     (
      *         name="phone_number",
-     *         in="body",
-     *         description="Student phone number",
+     *         in="query",
+     *         description="Student's phone",
      *         required=false,
-     *         type="string",
+     *         @OA\Schema(type="string")
      *     ),
-     *     @SWG\Parameter
+     *     @OA\Parameter
      *     (
      *         name="address",
-     *         in="body",
+     *         in="query",
      *         description="Student's address",
      *         required=false,
-     *         type="string",
+     *         @OA\Schema(type="string")
      *     ),
-     *     @SWG\Response
+     *     @OA\Response
      *     (
      *         response=200,
-     *         description="successful operation",
-     *         @SWG\Schema
+     *         description="Successful update student",
+     *         @OA\JsonContent
      *         (
-     *              type="array",
-     *              @SWG\Items
-     *              (
-     *                  type="object",
-     *                  @SWG\Property
-     *                  (
-     *                      property="upd_obj",
-     *                      @SWG\Schema(ref="#/definitions/Student")
-     *                  ),
-     *                  @SWG\Property
-     *                  (
-     *                      property="description",
-     *                      type="string"
-     *                  )
-     *              )
-     *          )
+     *              @OA\Property(property="description", type="string"),
+     *              @OA\Property(property="upd_obj", type="object", allOf = { @OA\Schema(ref="#/components/schemas/Student") } )
+     *         )
      *     ),
-     *     @SWG\Response
+     *     @OA\Response
      *     (
      *         response="404",
      *         description="Student is not found",
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response
+     *     (
      *          response="422",
      *          description="One of the parameters is incorrect",
-     *          @SWG\Schema
+     *          @OA\JsonContent
      *          (
-     *              type="array",
-     *              @SWG\Items
-     *              (
-     *                  type="object",
-     *                  @SWG\Property
-     *                  (
-     *                      property="error_field",
-     *                      type="string"
-     *                  ),
-     *                  @SWG\Property
-     *                  (
-     *                      property="description",
-     *                      type="string"
-     *                  )
-     *              )
+     *              @OA\Property(property="description", type="string"),
+     *              @OA\Property(property="error_field", type="string")
      *          )
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response
+     *     (
      *          response="400",
      *          description="Unexpected server error or related services",
-     *          @SWG\Schema
+     *          @OA\JsonContent
      *          (
-     *              type="array",
-     *              @SWG\Items
-     *              (
-     *                  type="object",
-     *                  @SWG\Property
-     *                  (
-     *                      property="description",
-     *                      type="string"
-     *                  )
-     *              )
+     *              @OA\Property(property="description", type="string")
      *          )
      *     ),
-     *     @SWG\Response
+     *     @OA\Response
      *     (
      *          response="401",
      *          description="Unauthorized user",
+     *          @OA\JsonContent
+     *          (
+     *              @OA\Property(property="error", type="string")
+     *          )
      *     )
      * )
      */
@@ -602,51 +546,50 @@ class StudentController extends Controller
     }
 
     /**
-     * @SWG\Delete
+     * @OA\Delete
      * (
-     *     path="/students/{student_id}",
-     *     summary="Remove student from storage by id",
+     *     path="/api/students/{student_id}",
+     *     summary="Remove student by id",
      *     tags={"Students"},
      *     description="Remove student from storage by id",
-     *     @SWG\Parameter
+     *     @OA\Parameter
      *     (
      *         name="student_id",
      *         in="path",
      *         description="Student id",
      *         required=true,
-     *         type="integer",
+     *         @OA\Schema(type="integer")
      *     ),
-     *     @SWG\Response
+     *     @OA\Response
      *     (
      *         response=200,
-     *         description="successful operation"
+     *         description="Successful delete student",
+     *         @OA\JsonContent
+     *         (
+     *              @OA\Property(property="description", type="string")
+     *         )
      *     ),
-     *     @SWG\Response
+     *     @OA\Response
      *     (
      *         response="404",
      *         description="Student is not found",
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *          response="400",
      *          description="Unexpected server error or related services",
-     *          @SWG\Schema
+     *          @OA\JsonContent
      *          (
-     *              type="array",
-     *              @SWG\Items
-     *              (
-     *                  type="object",
-     *                  @SWG\Property
-     *                  (
-     *                      property="description",
-     *                      type="string"
-     *                  )
-     *              )
+     *              @OA\Property(property="description", type="string")
      *          )
      *     ),
-     *     @SWG\Response
+     *     @OA\Response
      *     (
      *         response="401",
      *         description="Unauthorized user",
+     *         @OA\JsonContent
+     *         (
+     *              @OA\Property(property="error", type="string")
+     *         )
      *     )
      * )
      */

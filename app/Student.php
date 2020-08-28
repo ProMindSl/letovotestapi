@@ -5,102 +5,128 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @SWG\Definition(
- *  definition="Student",
- *  @SWG\Property
+ * @OA\Schema
+ * (
+ *  title="Student",
+ *  @OA\Property
  *  (
  *      property="id",
- *      type="integer"
+ *      type="integer",
+ *      description="Id ученика"
  *  ),
- *  @SWG\Property
+ *  @OA\Property
  *  (
  *      property="last_name",
- *      type="string"
+ *      type="string",
+ *      description="Фамилия"
  *  ),
- *  @SWG\Property
+ *  @OA\Property
  *  (
  *      property="name",
- *      type="string"
+ *      type="string",
+ *      description="Имя"
  *  ),
- *  @SWG\Property
+ *  @OA\Property
  *  (
  *      property="patronymic",
- *      type="string"
+ *      type="string",
+ *      description="Отчество"
  *  ),
- *  @SWG\Property
+ *  @OA\Property
  *  (
  *      property="email",
- *      type="string"
+ *      type="string",
+ *      description="Email адрес"
  *  ),
- *  @SWG\Property
+ *  @OA\Property
  *  (
  *      property="phone_number",
- *      type="string"
+ *      type="string",
+ *      description="Номер телефона"
  *  ),
- *  @SWG\Property
+ *  @OA\Property
  *  (
  *      property="full_address",
- *      type="string"
+ *      type="string",
+ *      description="Полный адрес"
  *  ),
- *  @SWG\Property
+ *  @OA\Property
  *  (
  *      property="country",
- *      type="string"
+ *      type="string",
+ *      description="Доп инфо по адресу проживания: Страна"
  *   ),
- *   @SWG\Property
+ *   @OA\Property
  *  (
  *      property="postal_code",
- *      type="string"
+ *      type="string",
+ *      description="Доп инфо по адресу проживания: Индекс"
  *  ),
- *  @SWG\Property
+ *  @OA\Property
  *  (
  *      property="region",
- *      type="string"
+ *      type="string",
+ *      description="Доп инфо по адресу проживания: Регион"
  *  ),
- *  @SWG\Property
+ *  @OA\Property
  *  (
  *      property="area",
- *      type="string"
+ *      type="string",
+ *      description="Доп инфо по адресу проживания: Область"
  *  ),
- *  @SWG\Property
+ *  @OA\Property
  *  (
  *      property="city",
- *      type="string"
+ *      type="string",
+ *      description="Доп инфо по адресу проживания: Город"
  *  ),
- *  @SWG\Property
- *  (
- *      property="street",
- *      type="string"
- *  ),
- *  @SWG\Property
- *  (
- *      property="house",
- *      type="string"
- *  ),
- *  @SWG\Property
- *  (
- *      property="block",
- *      type="string"
- *  ),
- *  @SWG\Property
- *  (
- *      property="flat",
- *      type="string"
- *  ),
- *  @SWG\Property
- *  (
- *      property="geo_lat",
- *      type="string"
- *  ),
- *  @SWG\Property
+ *  @OA\Property
  *  (
  *      property="city_type",
- *      type="string"
+ *      type="string",
+ *      description="Доп инфо по адресу проживания: Тип населенного пункта"
  *  ),
- *  @SWG\Property
+ *  @OA\Property
+ *  (
+ *      property="street",
+ *      type="string",
+ *      description="Доп инфо по адресу проживания: Улица"
+ *  ),
+ *  @OA\Property
+ *  (
+ *      property="house",
+ *      type="string",
+ *      description="Доп инфо по адресу проживания: Дом"
+ *  ),
+ *  @OA\Property
+ *  (
+ *      property="block",
+ *      type="string",
+ *      description="Доп инфо по адресу проживания: Корпус"
+ *  ),
+ *  @OA\Property
+ *  (
+ *      property="flat",
+ *      type="string",
+ *      description="Доп инфо по адресу проживания: Квартира"
+ *  ),
+ *  @OA\Property
+ *  (
+ *      property="geo_lat",
+ *      type="string",
+ *      description="Доп инфо по адресу проживания: Координата широты "
+ *  ),
+ *  @OA\Property
+ *  (
+ *      property="geo_lon",
+ *      type="string",
+ *      description="Доп инфо по адресу проживания: Координата долготы"
+ *  ),
+ *  @OA\Property
  *  (
  *      property="qc_address",
- *      type="integer"
+ *      type="integer",
+ *      description="Доп инфо по адресу проживания: Код корректности адресных данных"
  *  )
  *
  * )

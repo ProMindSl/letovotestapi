@@ -1,0 +1,525 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Letovo test API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/students": {
+            "get": {
+                "tags": [
+                    "Students"
+                ],
+                "summary": "Get list of students",
+                "operationId": "App\\Http\\Controllers\\StudentController::index",
+                "responses": {
+                    "200": {
+                        "description": "Successful get students list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/Student"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Empty students list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "description": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Students"
+                ],
+                "summary": "Create student",
+                "description": "Store a newly created student",
+                "operationId": "App\\Http\\Controllers\\StudentController::store",
+                "parameters": [
+                    {
+                        "name": "fio",
+                        "in": "query",
+                        "description": "Student's FIO",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Student's e-mail",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "phone_number",
+                        "in": "query",
+                        "description": "Student's phone",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "address",
+                        "in": "query",
+                        "description": "Student's address",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "new_obj": {
+                                            "type": "object",
+                                            "allOf": [
+                                                {
+                                                    "$ref": "#/components/schemas/Student"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "One of the parameters is incorrect",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "error_field": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Unexpected server error or error accessing related third-party services",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "description": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/students/{student_id}": {
+            "get": {
+                "tags": [
+                    "Students"
+                ],
+                "summary": "Get student by id",
+                "description": "Get student by id",
+                "operationId": "App\\Http\\Controllers\\StudentController::show",
+                "parameters": [
+                    {
+                        "name": "student_id",
+                        "in": "path",
+                        "description": "Student id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful get student",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Student"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Student is not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Students"
+                ],
+                "summary": "Update student by id",
+                "description": "Update student by id",
+                "operationId": "App\\Http\\Controllers\\StudentController::update",
+                "parameters": [
+                    {
+                        "name": "student_id",
+                        "in": "path",
+                        "description": "Student id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "fio",
+                        "in": "query",
+                        "description": "Student's FIO",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Student's e-mail",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "phone_number",
+                        "in": "query",
+                        "description": "Student's phone",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "address",
+                        "in": "query",
+                        "description": "Student's address",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful update student",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "upd_obj": {
+                                            "type": "object",
+                                            "allOf": [
+                                                {
+                                                    "$ref": "#/components/schemas/Student"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Student is not found"
+                    },
+                    "422": {
+                        "description": "One of the parameters is incorrect",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "error_field": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Unexpected server error or related services",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "description": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Students"
+                ],
+                "summary": "Remove student by id",
+                "description": "Remove student from storage by id",
+                "operationId": "App\\Http\\Controllers\\StudentController::destroy",
+                "parameters": [
+                    {
+                        "name": "student_id",
+                        "in": "path",
+                        "description": "Student id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful delete student",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "description": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Student is not found"
+                    },
+                    "400": {
+                        "description": "Unexpected server error or related services",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "description": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Student": {
+                "title": "Student",
+                "properties": {
+                    "id": {
+                        "description": "Id ученика",
+                        "type": "integer"
+                    },
+                    "last_name": {
+                        "description": "Фамилия",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Имя",
+                        "type": "string"
+                    },
+                    "patronymic": {
+                        "description": "Отчество",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Email адрес",
+                        "type": "string"
+                    },
+                    "phone_number": {
+                        "description": "Номер телефона",
+                        "type": "string"
+                    },
+                    "full_address": {
+                        "description": "Полный адрес",
+                        "type": "string"
+                    },
+                    "country": {
+                        "description": "Доп инфо по адресу проживания: Страна",
+                        "type": "string"
+                    },
+                    "postal_code": {
+                        "description": "Доп инфо по адресу проживания: Индекс",
+                        "type": "string"
+                    },
+                    "region": {
+                        "description": "Доп инфо по адресу проживания: Регион",
+                        "type": "string"
+                    },
+                    "area": {
+                        "description": "Доп инфо по адресу проживания: Область",
+                        "type": "string"
+                    },
+                    "city": {
+                        "description": "Доп инфо по адресу проживания: Город",
+                        "type": "string"
+                    },
+                    "city_type": {
+                        "description": "Доп инфо по адресу проживания: Тип населенного пункта",
+                        "type": "string"
+                    },
+                    "street": {
+                        "description": "Доп инфо по адресу проживания: Улица",
+                        "type": "string"
+                    },
+                    "house": {
+                        "description": "Доп инфо по адресу проживания: Дом",
+                        "type": "string"
+                    },
+                    "block": {
+                        "description": "Доп инфо по адресу проживания: Корпус",
+                        "type": "string"
+                    },
+                    "flat": {
+                        "description": "Доп инфо по адресу проживания: Квартира",
+                        "type": "string"
+                    },
+                    "geo_lat": {
+                        "description": "Доп инфо по адресу проживания: Координата широты ",
+                        "type": "string"
+                    },
+                    "geo_lon": {
+                        "description": "Доп инфо по адресу проживания: Координата долготы",
+                        "type": "string"
+                    },
+                    "qc_address": {
+                        "description": "Доп инфо по адресу проживания: Код корректности адресных данных",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}

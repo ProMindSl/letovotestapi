@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/**
+ * @OA\Get(
+ *     path="/",
+ *     description="Home page",
+ *     @OA\Response(response="default", description="Welcome page")
+ * )
+ */
 Route::get('/', function () {
     return view('welcome');
 });

@@ -37,3 +37,4 @@ Route::group([
             'students' => 'StudentController'
         ]);
 });
+

@@ -8,16 +8,21 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
 /**
- * @SWG\Swagger(
+ * @OA\Swagger
+ * (
  *   schemes={"http"},
  *   host="promindsl.ru",
- *   basePath="/",
- *   @SWG\Info(
+ *   basePath="/api",
+ *   @OA\Info
+ *   (
  *     title="Letovo test API",
  *     version="1.0.0"
  *   )
  * )
+ *
+ *
  */
+
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
