@@ -14,7 +14,7 @@ class StudentController extends Controller
     /**
      * @OA\Get
      * (
-     *     path="/api/students",
+     *     path="/public/api/students",
      *     summary="Get list of students",
      *     tags={"Students"},
      *     @OA\Response
@@ -67,7 +67,7 @@ class StudentController extends Controller
     /**
      * @OA\Post
      * (
-     *     path="/api/students",
+     *     path="/public/api/students",
      *     summary="Create student",
      *     tags={"Students"},
      *     description="Store a newly created student",
@@ -277,7 +277,7 @@ class StudentController extends Controller
     /**
      * @OA\Get
      * (
-     *     path="/api/students/{student_id}",
+     *     path="/public/api/students/{student_id}",
      *     summary="Get student by id",
      *     tags={"Students"},
      *     description="Get student by id",
@@ -320,7 +320,7 @@ class StudentController extends Controller
     /**
      * @OA\Put
      * (
-     *     path="/api/students/{student_id}",
+     *     path="/public/api/students/{student_id}",
      *     summary="Update student by id",
      *     tags={"Students"},
      *     description="Update student by id",
@@ -548,7 +548,7 @@ class StudentController extends Controller
     /**
      * @OA\Delete
      * (
-     *     path="/api/students/{student_id}",
+     *     path="/public/api/students/{student_id}",
      *     summary="Remove student by id",
      *     tags={"Students"},
      *     description="Remove student from storage by id",
