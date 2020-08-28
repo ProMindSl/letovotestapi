@@ -5,7 +5,7 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/api/students": {
+        "/public/api/students": {
             "get": {
                 "tags": [
                     "Students"
@@ -177,7 +177,7 @@
                 }
             }
         },
-        "/api/students/{student_id}": {
+        "/public/api/students/{student_id}": {
             "get": {
                 "tags": [
                     "Students"
