@@ -2,7 +2,7 @@
 
 RestApi на основе laravel/framework
 
-Swagger-документация: http://promindsl.ru/api/documentation
+Swagger-документация: http://promindsl.ru/public/api/documentation
 
 Основной функционал:
 - Получение данных по ученикам
